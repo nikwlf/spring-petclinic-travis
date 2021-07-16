@@ -3,13 +3,11 @@ language: java
 jdk: oraclejdk8
 services:
   - docker
-before_script:
-  - 'echo "before script bla"'
-script:
-  - 'echo "script bla"'
 jobs:
   include:
     - stage: loginToAcr
       script: '[ "${TRAVIS_PULL_REQUEST}" != "false" ] || [ "${TRAVIS_BRANCH}" != "main" ] || docker login -u "$ACR_USER" -p "$ACR_USER_PASSWORD" qweq2d4513f6123d4s.azurecr.io'
+    - #same stage
+      script: 'echo "test"'
     - stage: buildAndPush
-      script: - ./mvnw spring-boot:build-image -D spring-boot.build-image.imageName=qweq2d4513f6123d4s.azurecr.io/travis/petclinic && ([ "${TRAVIS_BRANCH}" != "main" ] || docker push qweq2d4513f6123d4s.azurecr.io/travis/petclinic)
+      script: ./mvnw spring-boot:build-image -D spring-boot.build-image.imageName=qweq2d4513f6123d4s.azurecr.io/travis/petclinic && ([ "${TRAVIS_BRANCH}" != "main" ] || docker push qweq2d4513f6123d4s.azurecr.io/travis/petclinic)
