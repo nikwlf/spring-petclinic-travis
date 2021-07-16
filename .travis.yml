@@ -7,3 +7,11 @@ before_script:
   - '[ "${TRAVIS_PULL_REQUEST}" != "false" ] || [ "${TRAVIS_BRANCH}" != "main" ] || docker login -u "$ACR_USER" -p "$ACR_USER_PASSWORD" qweq2d4513f6123d4s.azurecr.io'
 script:
   - ./mvnw spring-boot:build-image -D spring-boot.build-image.imageName=qweq2d4513f6123d4s.azurecr.io/travis/petclinic && ([ "${TRAVIS_BRANCH}" != "main" ] || docker push qweq2d4513f6123d4s.azurecr.io/travis/petclinic)
+jobs:
+  include:
+    - stage: test
+      script: 'echo "test 1"'
+    - # stage name not required, will continue to use `test`
+      script: 'echo "test 2"'
+    - stage: deploy
+      script: 'echo "deploying"'
