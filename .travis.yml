@@ -6,7 +6,7 @@ services:
 before_script:
   - 'echo "before script bla"'
 script:
-  - - 'echo "script bla"'
+  - 'echo "script bla"'
 jobs:
   include:
     - stage: loginToAcr
