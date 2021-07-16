@@ -8,6 +8,6 @@ jobs:
     - stage: Login to ACR repository
       script: '[ "${TRAVIS_PULL_REQUEST}" != "false" ] || [ "${TRAVIS_BRANCH}" != "main" ] || docker login -u "$ACR_USER" -p "$ACR_USER_PASSWORD" qweq2d4513f6123d4s.azurecr.io'
     - # stage name not required, will continue to use `test`
-      script: 'echo "test 2"'
+      script: 'echo "parallelstuff"'
     - stage: build and push
       script: - ./mvnw spring-boot:build-image -D spring-boot.build-image.imageName=qweq2d4513f6123d4s.azurecr.io/travis/petclinic && ([ "${TRAVIS_BRANCH}" != "main" ] || docker push qweq2d4513f6123d4s.azurecr.io/travis/petclinic)
